@@ -109,7 +109,15 @@ async def home(request: Request):
         "get_guild_count"
     )  # get the guild count
 	guild_count = str(guild_count)
-	return templates.TemplateResponse("index.html", {"request": request, "guild_count": guild_count})
+	user_count = await ipc_client.request(
+        "get_user_count"
+    )  # get the guild count
+	user_count = str(user_count)	
+	channel_count = await ipc_client.request(
+        "get_channel_count"
+    )  # get the guild count
+	channel_count = str(channel_count)
+	return templates.TemplateResponse("index.html", {"request": request, "guild_count": guild_count, "user_count": user_count, "channel_count": channel_count})
 
 
 if __name__ == "__main__":
