@@ -103,6 +103,10 @@ async def redoc_html():
         redoc_js_url="/static/redoc.standalone.js",
     )
 
+@app.get("/invite")
+async def invite(request : Request):
+	return RedirectResponse("https://discord.com/oauth2/authorize?client_id=844213992955707452&scope=bot&permissions=2062")
+
 @app.get("/")
 async def home(request: Request):
 	guild_count = await ipc_client.request(
