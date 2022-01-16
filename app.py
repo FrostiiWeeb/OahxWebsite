@@ -103,6 +103,10 @@ async def redoc_html():
         redoc_js_url="/static/redoc.standalone.js",
     )
 
+@app.get("/support")
+async def support():
+	return RedirectResponse("https://discord.com/invite/KpjmB7BX4E")
+
 @app.get("/invite")
 async def invite(request : Request):
 	return RedirectResponse("https://discord.com/oauth2/authorize?client_id=844213992955707452&scope=bot&permissions=2062")
