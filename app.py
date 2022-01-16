@@ -66,7 +66,7 @@ app = FastAPI(
 app.mount("/website/assets", StaticFiles(directory="./website/assets"), name="assets")
 app.mount("/website/js", StaticFiles(directory="./website/js"), name="js")
 app.mount("/website/css", StaticFiles(directory="./website/css"), name="css")
-ipc_client = ipc.Client(secret_key="my_secret_key")  # secret_key must be the same as your server
+ipc_client = ipc.Client(secret_key="my_secret_key", port=7870, multicast_port=28900)  # secret_key must be the same as your server
 
 
 templates = Jinja2Templates(directory="website")
@@ -107,7 +107,7 @@ async def redoc_html():
 async def home(request: Request):
 	guild_count = await ipc_client.request(
         "get_guild_count"
-    )  # get the member count of server with ID 12345678
+    )  # get the guild count
 	guild_count = str(guild_count)
 	return templates.TemplateResponse("index.html", {"request": request, "guild_count": guild_count})
 
